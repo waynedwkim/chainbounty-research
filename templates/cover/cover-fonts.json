@@ -1,0 +1,19 @@
+{
+  "profile": "Liberation Serif Bold 700 + Liberation Sans Regular 400",
+  "fonts": {
+    "serif": {
+      "family": "Liberation Serif",
+      "style": "Bold",
+      "file": "LiberationSerif-Bold.ttf",
+      "sha256": "443a4dbd694b6e4689925947b456e0532e10b19c90fa32eb39ea6c2cd9db9ebd"
+    },
+    "sans": {
+      "family": "Liberation Sans",
+      "style": "Regular",
+      "file": "LiberationSans-Regular.ttf",
+      "sha256": "bade59d822652f76e6941aa87b40a87c13d1cc70db98ededb5011127efafd1d3"
+    }
+  },
+  "license": "SIL Open Font License 1.1; unmodified exact TTF files and full license bundled in support/assets/fonts",
+  "originalReference": "Georgia / Segoe UI specified; rendered font not provable from PNG; portable profile is not pixel-identical"
+}
