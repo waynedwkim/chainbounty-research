@@ -1,0 +1,93 @@
+{
+  "cover": {
+    "title": "79th Vault / 79AU",
+    "subtitle": [
+      "How a privileged token function",
+      "drained the pool"
+    ],
+    "dateline": "October 9, 2026"
+  },
+  "publishedAt": "2026-10-09",
+  "metrics": [
+    "2,520,000",
+    "9",
+    "3",
+    "≈17,881 BNB"
+  ],
+  "rows": [
+    {
+      "label": "Seller A",
+      "value": 2010000
+    },
+    {
+      "label": "Seller B",
+      "value": 500000
+    },
+    {
+      "label": "Third wallet",
+      "value": 10000
+    }
+  ],
+  "unit": "79AU",
+  "nodes": [
+    {
+      "id": "collection",
+      "label": "Collection wallet",
+      "role": "0x629b…6231",
+      "detail": "Received 16,249.117811 BNB from Seller A and 3.790317 BNB from the hot wallet. Empty at the report snapshot.",
+      "url": "https://bscscan.com/address/0x629b368c6bf1a9f190e38f21235033fece8a6231",
+      "tone": "slate"
+    },
+    {
+      "id": "holding",
+      "label": "Primary holding",
+      "role": "0xa953…4f89",
+      "detail": "Received 14,394.916171 BNB. The later October 9 balance was 14,384.806266 BNB; transfer and balance are distinct.",
+      "url": "https://bscscan.com/address/0xa9537b40b02af7af8f1543aea3691992b2174f89",
+      "tone": "sage"
+    },
+    {
+      "id": "secondary",
+      "label": "Secondary wallet",
+      "role": "0x1e2a…16a3",
+      "detail": "Received 1,302 BNB. The October 9 account reported approximately 1,212 BNB remaining.",
+      "url": "https://bscscan.com/address/0x1e2a669ec4e54e3960588b35eca6a075f31216a3",
+      "tone": "sage"
+    },
+    {
+      "id": "proxy",
+      "label": "Tornado.cash proxy",
+      "role": "Selected exit route",
+      "detail": "1 BNB went through the proxy to its 1 BNB pool. The published assessment describes a possible test deposit.",
+      "tone": "amber"
+    }
+  ],
+  "edges": [
+    {
+      "from": "collection",
+      "to": "holding",
+      "label": "14,394.916171 BNB",
+      "kind": "observed"
+    },
+    {
+      "from": "collection",
+      "to": "secondary",
+      "label": "1,302 BNB",
+      "kind": "observed"
+    },
+    {
+      "from": "collection",
+      "to": "proxy",
+      "label": "1 BNB",
+      "kind": "observed"
+    }
+  ],
+  "captions": [
+    "Figure 1. Initial token quantities received, not dollar losses or later balances. All bars start at zero.",
+    "Figure 2. Selected outward transfers only; this is not a complete reconciliation. Equal-width arrows do not encode amounts."
+  ],
+  "conclusion": [
+    "The published account records no recovery at its October 9 snapshot. It leaves key theft versus insider misuse unresolved; destination-chain payouts remain outside its scope."
+  ],
+  "prompt": "Investigate the 79th Vault / 79AU incident on BNB Smart Chain (chain ID 56), starting from transaction 0xee0e44167518ff0071ede02a03b3710a1a8438d52616aad4bf1d5e417b37b0df. Follow the identified holdings and outflows after the October 9, 2026 report snapshot. State the query cutoff, include transaction links, distinguish supported findings from inference, and keep unestablished destination-chain payouts outside the confirmed route."
+}

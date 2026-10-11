@@ -2,7 +2,7 @@ import { z } from 'zod';
 const text = z.string().trim().min(1);
 const id = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 const link = z.url().refine(v => v.startsWith('https://'), 'Only HTTPS source links are allowed');
-const source = z.object({label:text, url:link}).strict();
+const source = z.object({label:text, url:link,publisher:text.optional(),publishedAt:z.iso.date().optional(),section:text.optional()}).strict();
 const common = {id, title:text};
 const figure = {caption:text, note:text, source};
 const tone = z.enum(['slate','sage','amber']);
@@ -18,7 +18,7 @@ export const articleSchema = z.object({
   publishedAt:z.iso.date(),asOf:text,author:text,readingMinutes:z.number().int().positive(),
   cover:z.object({title:text,subtitle:z.array(text).min(1).max(2),dateline:text}).strict(),
   metrics:z.array(z.object({value:text,label:text}).strict()).min(1).max(4),
-  blocks:z.array(blockSchema).min(1),sources:z.array(source).min(1),
+  sourceNote:text,blocks:z.array(blockSchema).min(1),sources:z.array(source).min(1),
   cta:z.object({title:text,description:text,label:text,url:link,prompt:text}).strict()
 }).strict().superRefine((article,ctx)=>{
   const ids=new Set<string>();

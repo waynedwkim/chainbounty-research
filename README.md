@@ -34,6 +34,8 @@ The import boundary is **reviewed structured content**, not arbitrary PDF parsin
 
 ## Content contract
 
+See [EDITORIAL.md](EDITORIAL.md) for the Chicago-informed house style, technical exceptions, source-note format, and motion/accessibility rules. Shared dates, exact numeric display, reading times, and action labels live in `src/editorial.ts`; components apply them to every article. Add a case-specific `sourceNote` to each article. Source records may also provide `publisher`, `publishedAt`, and `section` for consistent linked attribution.
+
 `src/schema.ts` is the authoritative Zod schema and inferred TypeScript contract. Every JSON file is parsed at build time. Unknown fields, invalid dates, negative chart values, unsafe source URL protocols, duplicate slugs/section IDs and missing flow endpoints fail the build.
 
 - `prose`: `id`, `title`, `paragraphs[]`.
@@ -71,6 +73,8 @@ npm run test:e2e
 Playwright tests use an isolated headless Edge context, never the user's existing tabs. They cover search/reset, keyboard selection, clipboard, repeated home/article navigation, deep routes, 404, no-JavaScript reading, image loading, reduced motion and horizontal overflow at 360px and 390px. Screenshots appear in `test-results/`. Cover receipts appear in `dist/cover-validation.json`.
 
 ## Content provenance and exclusions
+
+Additional interaction checks cover optional recipient shares, selectable flow edges, arrow-key navigation, back/forward history, unchanged document height during scrolling, and missing/failed observers. One test records a short WebM in `test-results/interaction-recording/`; on an Edge-only Windows installation, first run `npx playwright install ffmpeg`. The runtime uses no animation library or external data requests. Scroll entrances use opacity/transforms and respect reduced motion; unobserved content is visible by default.
 
 Sample: [published 79AU article](https://community.chainbounty.io/ko/posts/01a11f85-62b6-7009-b7a1-2580b34c78de), October 9, 2026. This is a concise interactive reading edition, not a claim to reproduce the full report. The original SentinelTX PDF, private investigation metadata and review notes are not included. Figures describe the public article's historical snapshot, not current balances. No identity attribution is added.
 
