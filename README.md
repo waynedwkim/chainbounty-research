@@ -14,6 +14,8 @@ npm run preview
 
 Open **http://127.0.0.1:4173**. `npm run dev` rebuilds when content/templates change; reload the browser after a successful rebuild. The preview binds only to localhost.
 
+With the preview server running, `npm run preview:chrome` opens an isolated visible Google Chrome window. It uses the native window viewport (`viewport: null`) and follows resizing/maximizing. Fixed Playwright viewports are for automated tests only: they can leave a large blank region inside a larger visible browser window.
+
 On Linux or a machine without Edge, install a Playwright browser and use the Chromium channel:
 
 ```sh
@@ -33,6 +35,8 @@ BROWSER_CHANNEL=chromium npm run test:e2e
 The import boundary is **reviewed structured content**, not arbitrary PDF parsing. This is not a production CMS, authentication system, wallet connector, or live blockchain indexer. A private GitHub repository does not make a separately hosted site private. `noindex` and robots exclusions are crawl preferences, not access control.
 
 ## Content contract
+
+See [EDITORIAL.md](EDITORIAL.md) for the Chicago-informed house style, technical exceptions, source-note format, and motion/accessibility rules. Shared dates, exact numeric display, reading times, and action labels live in `src/editorial.ts`; components apply them to every article. Add a case-specific `sourceNote` to each article. Source records may also provide `publisher`, `publishedAt`, and `section` for consistent linked attribution.
 
 `src/schema.ts` is the authoritative Zod schema and inferred TypeScript contract. Every JSON file is parsed at build time. Unknown fields, invalid dates, negative chart values, unsafe source URL protocols, duplicate slugs/section IDs and missing flow endpoints fail the build.
 
@@ -68,9 +72,11 @@ npm run build
 npm run test:e2e
 ```
 
-Playwright tests use an isolated headless Edge context, never the user's existing tabs. They cover search/reset, keyboard selection, clipboard, repeated home/article navigation, deep routes, 404, no-JavaScript reading, image loading, reduced motion and horizontal overflow at 360px and 390px. Screenshots appear in `test-results/`. Cover receipts appear in `dist/cover-validation.json`.
+Playwright tests use an isolated headless Edge context, never the user's existing tabs. They cover archive and official channel navigation, keyboard selection, clipboard, repeated home/article navigation, deep routes, 404, no-JavaScript reading, image loading, reduced motion and horizontal overflow at 320, 360, 390, 768, 1024, 1280 and 1440px. Screenshots appear in `test-results/`. Cover receipts appear in `dist/cover-validation.json`.
 
 ## Content provenance and exclusions
+
+Additional interaction checks cover optional recipient shares, selectable flow edges, arrow-key navigation, back/forward history, unchanged document height during scrolling, and missing/failed observers. One test records a short WebM in `test-results/interaction-recording/`; on an Edge-only Windows installation, first run `npx playwright install ffmpeg`. The runtime uses no animation library or external data requests. Scroll entrances use opacity/transforms and respect reduced motion; unobserved content is visible by default.
 
 Sample: [published 79AU article](https://community.chainbounty.io/ko/posts/01a11f85-62b6-7009-b7a1-2580b34c78de), October 9, 2026. This is a concise interactive reading edition, not a claim to reproduce the full report. The original SentinelTX PDF, private investigation metadata and review notes are not included. Figures describe the public article's historical snapshot, not current balances. No identity attribution is added.
 
@@ -81,3 +87,10 @@ Font license: `public/assets/fonts/LICENSE.txt` (SIL Open Font License). ChainBo
 ## Private GitHub handoff
 
 See `scripts/push-private.ps1`. It verifies the authenticated user is exactly `waynedwkim`, refuses to reuse an existing repository, creates only a **private personal** repository, pushes `main`, and verifies remote commit and visibility. It never deploys the site. If `GH_TOKEN` is invalid, reauthenticate the GitHub CLI locally; do not paste tokens into source files or chat.
+
+
+## Community article previews
+
+The homepage's Community cards are a curated static selection in `content/community-posts.json`, separate from full local investigations in `content/articles/`. Each entry records the official article URL, exact published title/date, short qualified summary, local cover, original image URL, alt text and verification date. Update it only after reading the public original and checking its cover. Save approved cover bytes under `public/assets/community/`; the build validates metadata and fails if a referenced local image is missing. Dates are publication dates, not incident dates. No live feed, login, automatic synchronization or full-article copying is implemented.
+
+The current selection uses BitBay StableVault (October 12, 2026) and EtherVista (October 10, 2026), verified from their rendered official Community pages on October 12. Both original covers are 3200x1800. The 79AU preview is omitted here because its full interactive article already appears above. Card CTAs open the official originals in the same tab.

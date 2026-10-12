@@ -4,7 +4,7 @@
     "dev": "tsx scripts/dev.ts", "build": "tsx scripts/build.ts", "preview": "tsx scripts/serve.ts",
     "typecheck": "tsc --noEmit", "lint": "eslint src scripts tests", "test": "tsx --test tests/content.test.ts",
     "test:e2e": "playwright test", "check": "npm run lint && npm run typecheck && npm test && npm run build",
-    "new:article": "tsx scripts/new-article.ts"
+    "new:article": "tsx scripts/new-article.ts", "preview:chrome": "tsx scripts/open-preview.ts"
   },
   "dependencies": { "zod": "^4.1.12" },
   "devDependencies": { "typescript": "^5.9.3", "tsx": "^4.20.6", "esbuild": "^0.25.11", "@types/node": "^22.18.10", "@playwright/test": "^1.56.0", "eslint": "^9.38.0", "typescript-eslint": "^8.46.1", "@eslint/js": "^9.38.0" }

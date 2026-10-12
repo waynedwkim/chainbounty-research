@@ -3,7 +3,7 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {build} from 'esbuild';
 import {chromium} from '@playwright/test';
-import {loadArticles} from '../src/content.js';
+import {loadArticles,loadCommunityPosts} from '../src/content.js';
 import {home,articlePage,shell} from '../src/render.js';
 import {makeLockedCover,assertCoverStyle,coverLayoutIssues,COVER_STYLE} from '../templates/cover/cover-lock.mjs';
 export async function buildSite(){
@@ -40,7 +40,7 @@ export async function buildSite(){
    await writeFile(`${dist}/insights/${a.slug}/index.html`,articlePage(a));
   }
  }finally{await browser.close();}
- await writeFile(`${dist}/index.html`,home(articles));
+ await writeFile(`${dist}/index.html`,home(articles,await loadCommunityPosts()));
  await writeFile(`${dist}/404.html`,shell('Page not found','The requested investigation could not be found.','<main id="main" class="wrap home-intro"><p class="eyebrow">404 / NOT FOUND</p><h1>This route ends here.</h1><p>The investigation may have moved.</p><a href="/">Return to the research library →</a></main>'));
  await writeFile(`${dist}/robots.txt`,'User-agent: *\nDisallow: /\n');
  await writeFile(`${dist}/cover-validation.json`,JSON.stringify(receipts,null,2));
