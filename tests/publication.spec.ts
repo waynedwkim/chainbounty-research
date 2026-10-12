@@ -1,11 +1,14 @@
 import {test,expect} from '@playwright/test';
 
-for(const width of [320,390,768,1024,1280,1440])test(`publication navigation and complete layout at ${width}px`,async({page})=>{
+for(const width of [320,390,768,1024,1280,1440,2048])test(`publication navigation and complete layout at ${width}px`,async({page})=>{
  await page.setViewportSize({width,height:900});
  await page.emulateMedia({reducedMotion:'reduce'});
  for(const path of ['/','/insights/79au-privileged-function/']){
   await page.goto(path);await page.evaluate(()=>document.fonts.ready);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+  expect(await page.evaluate(()=>document.body.getBoundingClientRect().width)).toBe(width);
+  expect(await page.evaluate(()=>document.scrollingElement?.tagName)).toBe('HTML');
+  await expect(page.locator('iframe')).toHaveCount(0);
   for(const region of [page.locator('header'),page.locator('footer')]){
    const x=region.getByRole('link',{name:'X / Twitter'});
    await expect(x).toBeVisible();await expect(x).toHaveAttribute('href','https://x.com/ChainBountyX');
@@ -29,4 +32,11 @@ for(const width of [320,390,768,1024,1280,1440])test(`publication navigation and
  await page.goto('/');await page.keyboard.press('Tab');
  await expect(page.getByRole('link',{name:'Skip to content'})).toBeFocused();
  await page.keyboard.press('Enter');await expect(page).toHaveURL(/#main$/);
+ const link=page.locator('.text-link');
+ expect(await link.evaluate(el=>getComputedStyle(el).textDecorationLine)).toBe('none');
+ expect(await link.locator('.link-label').evaluate(el=>getComputedStyle(el).textDecorationLine)).toBe('underline');
+ await expect(link.locator('svg')).toHaveAttribute('aria-hidden','true');
+ const label=await link.locator('.link-label').boundingBox();const icon=await link.locator('svg').boundingBox();
+ expect(icon!.x-label!.x-label!.width).toBeCloseTo(8,0);
+ await link.focus();await page.keyboard.press('Enter');await expect(page.locator('h1')).toContainText('79AU');
 });

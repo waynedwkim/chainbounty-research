@@ -14,6 +14,8 @@ npm run preview
 
 Open **http://127.0.0.1:4173**. `npm run dev` rebuilds when content/templates change; reload the browser after a successful rebuild. The preview binds only to localhost.
 
+With the preview server running, `npm run preview:chrome` opens an isolated visible Google Chrome window. It uses the native window viewport (`viewport: null`) and follows resizing/maximizing. Fixed Playwright viewports are for automated tests only: they can leave a large blank region inside a larger visible browser window.
+
 On Linux or a machine without Edge, install a Playwright browser and use the Chromium channel:
 
 ```sh

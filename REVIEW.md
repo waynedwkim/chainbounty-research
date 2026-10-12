@@ -54,3 +54,16 @@ The two supplied reference screenshots could not be materialized on Windows: the
 ![Mobile navigation and article opening](docs/review/compact-home-mobile.png)
 
 Validation: lint, TypeScript, all 7 unit tests and production build passed. The 16-test Chrome suite covers both channels in both locations, six viewport widths, search absence, cover content ratio, desktop CTA position, skip link, chart keyboard/touch controls, reduced motion, observer failure, clipboard, and repeated navigation. Initial aspect-ratio assertions incorrectly counted the article cover border; the assertion now measures the image content box.
+
+## Native browser viewport and archive link correction
+
+The wide-window blank region was reproduced in visible Google Chrome. The old local preview launcher set a fixed 1440x1000 Playwright viewport inside a 2048x1152 browser window. This limited the page surface independently of window size. With `viewport: null`, the same window exposes a 2034x1058 content viewport (remaining pixels are browser chrome). Root scrolling is HTML; root transform is none, zoom is 1, and no iframe exists. The site's centered 1200px content measure remains intentional; header, background, footer and document scroll occupy the native browser surface. No root width/overflow workaround was added.
+
+The supported `npm run preview:chrome` launcher now uses the native viewport. Visible Chrome resizing from 2048 to 1280 and back to 2048 produced inner widths 2034, 1266 and 2034, with zero overflowing elements. Search inputs remain absent.
+
+The archive link previously inherited the anchor underline into its text arrow, and the arrow span added 15px padding. Only the label is now underlined; a decorative SVG direction arrow sits 8px away. Keyboard activation still opens the article.
+
+Validation: lint, types, 7 unit tests, production build and all 17 Chrome browser tests passed, including 2048px, complete body width, document scrolling, link styling/spacing and keyboard activation. The original cover, logo and article content were unchanged.
+
+![Native wide Chrome window](docs/review/native-wide-desktop.png)
+![Corrected article link](docs/review/article-link.png)
