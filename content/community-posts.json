@@ -1,0 +1,24 @@
+[
+  {
+    "title": "BitBay StableVault: The vault payout and the USDC trail",
+    "publishedAt": "2026-10-12",
+    "chain": "Polygon",
+    "summary": "Follow the vault’s DAI payout and the subsequent USDC exit. The onward destination remains unresolved, and a later USDC receipt is kept separate from the reported BitBay loss.",
+    "url": "https://community.chainbounty.io/ko/posts/01a12da5-d064-74cd-8c47-dadb39b0df3f",
+    "image": "/assets/community/bitbay.png",
+    "imageSource": "https://chainbounty.s3.amazonaws.com/media/files/6018aa22-0c07-44b9-bb1e-9aa353b80533.png",
+    "imageAlt": "ChainBounty investigation analysis: BitBay StableVault. The vault payout and the USDC trail. October 12, 2026.",
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "title": "EtherVista: Two swaps and the USDC trail",
+    "publishedAt": "2026-10-10",
+    "chain": "Ethereum",
+    "summary": "Examine the reported two-swap sequence and subsequent USDC transfers. The article distinguishes flow-derived positions from measured balances and leaves recipient ownership unresolved.",
+    "url": "https://community.chainbounty.io/ko/posts/01a124e8-a44f-7e49-94c0-d3d8326e54f4",
+    "image": "/assets/community/ethervista.png",
+    "imageSource": "https://chainbounty.s3.amazonaws.com/media/files/f16fd9d8-af55-41ea-8923-e8e3f95ce787.png",
+    "imageAlt": "ChainBounty investigation analysis: EtherVista. Two swaps and the USDC trail. October 10, 2026.",
+    "verifiedAt": "2026-10-12"
+  }
+]

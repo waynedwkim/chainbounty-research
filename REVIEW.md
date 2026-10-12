@@ -67,3 +67,14 @@ Validation: lint, types, 7 unit tests, production build and all 17 Chrome browse
 
 ![Native wide Chrome window](docs/review/native-wide-desktop.png)
 ![Corrected article link](docs/review/article-link.png)
+
+## Official Community article previews
+
+Replaced the three editorial-principle columns with two public article previews: BitBay StableVault: The vault payout and the USDC trail (October 12, 2026), and EtherVista: Two swaps and the USDC trail (October 10, 2026). Both titles, publication dates and original 3200x1800 covers were verified on the rendered official Community pages. Article and image provenance URLs are retained in `content/community-posts.json`. Short summaries retain unresolved routing/ownership and accounting qualifications. No private reports or complete article copies were added. The 79AU article is not repeated in this section.
+
+The navigation now targets Community articles at `/#community`; the removed approach anchor is no longer linked. Cards use complete 16:9 local cover assets, naturally wrapping titles and summaries, and a single keyboard-accessible original-article CTA. Metadata is curated and validated at build time, not a live integration. The visible Chrome preview still uses a native viewport.
+
+Validation: lint, TypeScript, all 7 unit tests, production build and 22 Chrome browser tests passed. Community cards were checked at 320, 390, 768, 1280 and 2048px for loaded images, image proportions, uncut text, exact article destinations, keyboard activation and overflow. Existing chart/navigation regression tests also passed. External link activation is intercepted in automated tests; the actual official originals were separately inspected in Chrome.
+
+![Community desktop cards](docs/review/community-desktop.png)
+![Community mobile cards](docs/review/community-mobile.png)

@@ -88,3 +88,9 @@ Font license: `public/assets/fonts/LICENSE.txt` (SIL Open Font License). ChainBo
 
 See `scripts/push-private.ps1`. It verifies the authenticated user is exactly `waynedwkim`, refuses to reuse an existing repository, creates only a **private personal** repository, pushes `main`, and verifies remote commit and visibility. It never deploys the site. If `GH_TOKEN` is invalid, reauthenticate the GitHub CLI locally; do not paste tokens into source files or chat.
 
+
+## Community article previews
+
+The homepage's Community cards are a curated static selection in `content/community-posts.json`, separate from full local investigations in `content/articles/`. Each entry records the official article URL, exact published title/date, short qualified summary, local cover, original image URL, alt text and verification date. Update it only after reading the public original and checking its cover. Save approved cover bytes under `public/assets/community/`; the build validates metadata and fails if a referenced local image is missing. Dates are publication dates, not incident dates. No live feed, login, automatic synchronization or full-article copying is implemented.
+
+The current selection uses BitBay StableVault (October 12, 2026) and EtherVista (October 10, 2026), verified from their rendered official Community pages on October 12. Both original covers are 3200x1800. The 79AU preview is omitted here because its full interactive article already appears above. Card CTAs open the official originals in the same tab.

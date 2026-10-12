@@ -34,3 +34,9 @@ export const articleSchema = z.object({
 });
 export type Article=z.infer<typeof articleSchema>;
 export type Block=z.infer<typeof blockSchema>;
+export const communityPostSchema=z.object({
+ title:text,publishedAt:z.iso.date(),chain:text,summary:text.max(350),
+ url:z.url().refine(v=>/^https:\/\/community\.chainbounty\.io\/[a-z]{2}\/posts\/[a-z0-9-]+$/.test(v),'Use an official Community article URL'),
+ image:z.string().regex(/^\/assets\/community\/[a-z0-9-]+\.png$/),imageSource:link,imageAlt:text,verifiedAt:z.iso.date()
+}).strict();
+export type CommunityPost=z.infer<typeof communityPostSchema>;

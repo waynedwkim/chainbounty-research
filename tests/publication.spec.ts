@@ -12,8 +12,8 @@ for(const width of [320,390,768,1024,1280,1440,2048])test(`publication navigatio
   for(const region of [page.locator('header'),page.locator('footer')]){
    const x=region.getByRole('link',{name:'X / Twitter'});
    await expect(x).toBeVisible();await expect(x).toHaveAttribute('href','https://x.com/ChainBountyX');
-   await expect(region.getByRole('link',{name:'Community'})).toHaveAttribute('href','https://community.chainbounty.io/');
-   await expect(region.getByRole('link',{name:'Community'})).toBeVisible();
+   await expect(region.getByRole('link',{name:'Community',exact:true})).toHaveAttribute('href','https://community.chainbounty.io/');
+   await expect(region.getByRole('link',{name:'Community',exact:true})).toBeVisible();
    await x.focus();await expect(x).toBeFocused();
   }
   await expect(page.getByRole('searchbox')).toHaveCount(0);
@@ -32,7 +32,7 @@ for(const width of [320,390,768,1024,1280,1440,2048])test(`publication navigatio
  await page.goto('/');await page.keyboard.press('Tab');
  await expect(page.getByRole('link',{name:'Skip to content'})).toBeFocused();
  await page.keyboard.press('Enter');await expect(page).toHaveURL(/#main$/);
- const link=page.locator('.text-link');
+ const link=page.locator('.research-card .text-link');
  expect(await link.evaluate(el=>getComputedStyle(el).textDecorationLine)).toBe('none');
  expect(await link.locator('.link-label').evaluate(el=>getComputedStyle(el).textDecorationLine)).toBe('underline');
  await expect(link.locator('svg')).toHaveAttribute('aria-hidden','true');
