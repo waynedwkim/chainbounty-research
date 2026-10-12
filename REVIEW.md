@@ -41,3 +41,16 @@ Screenshots and the interaction recording below are local test captures, not a p
 This is not a comprehensive accessibility certification or a lab performance score. Physical iOS, screen-reader software, and network-throttled field performance were not tested. Motion uses layout-preserving transforms/opacity and never hides content while waiting for an observer. See the PR checks for the final remote CI result.
 
 Local preview on the Windows desktop: `http://127.0.0.1:4173/`. This address is not reachable from the user's phone. Review images and the recording in this private repository while signed in to GitHub.
+
+## October 12 navigation and viewport refinement
+
+Removed the oversized two-line introduction and journal eyebrow, search input, network filter, reset control, and their client-side state. The archive and article navigation remain. Official X/Twitter and Community links now appear in both the shared header and footer, including mobile. These use small conventional external-link icons; the original ChainBounty logo is unchanged. Existing article and case-investigation CTAs remain without extra promotional buttons.
+
+Independent Chrome measurements found no horizontal overflow before or after at 320, 390, 768, 1024, 1280, and 1440px. The large introduction pushed the featured card below the first desktop viewport: at 1280px, its bottom moved from 1105px to 706px in a 900px viewport. Mobile remains a naturally scrolling single-column page. No fixed-height crop or overflow-hiding workaround was added. Original 16:9 cover content is complete.
+
+The two supplied reference screenshots could not be materialized on Windows: the supported Library helper failed with `AttributeError: module 'os' has no attribute 'setxattr'`, including one consumer-local retry. They were not viewed; the diagnosis above comes from direct local Chrome rendering.
+
+![Compact desktop opening](docs/review/compact-home-desktop.png)
+![Mobile navigation and article opening](docs/review/compact-home-mobile.png)
+
+Validation: lint, TypeScript, all 7 unit tests and production build passed. The 16-test Chrome suite covers both channels in both locations, six viewport widths, search absence, cover content ratio, desktop CTA position, skip link, chart keyboard/touch controls, reduced motion, observer failure, clipboard, and repeated navigation. Initial aspect-ratio assertions incorrectly counted the article cover border; the assertion now measures the image content box.

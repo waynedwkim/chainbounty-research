@@ -1,21 +1,4 @@
-import {resultCount,labels} from './editorial.js';
-const form=document.querySelector<HTMLFormElement>('.filters');
-if(form){
- const apply=()=>{
-  const data=new FormData(form);const q=String(data.get('q')??'').trim().toLowerCase();const chain=String(data.get('chain')??'');
-  let count=0;
-  document.querySelectorAll<HTMLElement>('[data-card]').forEach(card=>{card.hidden=!(card.dataset.search?.includes(q)&&(!chain||card.dataset.chain===chain));if(!card.hidden)count++;});
-  document.querySelector('.result-count')!.textContent=resultCount(count);
-  document.querySelector<HTMLElement>('.empty')!.hidden=count!==0;
-  const params=new URLSearchParams();if(q)params.set('q',q);if(chain)params.set('chain',chain);
-  history.replaceState(null,'',`${location.pathname}${params.size?'?'+params:''}${location.hash}`);
- };
- const params=new URLSearchParams(location.search);
- (form.elements.namedItem('q') as HTMLInputElement).value=params.get('q')??'';
- const select=form.elements.namedItem('chain') as HTMLSelectElement;
- select.value=params.get('chain')??'';if(select.selectedIndex<0)select.value='';
- form.addEventListener('submit',e=>{e.preventDefault();apply();});form.addEventListener('input',apply);form.addEventListener('reset',()=>setTimeout(apply));apply();
-}
+import {labels} from './editorial.js';
 document.querySelectorAll<HTMLButtonElement>('[data-select]').forEach(button=>button.addEventListener('click',()=>{
  document.querySelectorAll<HTMLButtonElement>('[data-select]').forEach(peer=>{if(peer.dataset.group===button.dataset.group)peer.setAttribute('aria-pressed',String(peer===button));});
  const panel=document.getElementById(button.getAttribute('aria-controls')!)!;

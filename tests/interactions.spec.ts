@@ -20,7 +20,7 @@ test('derived shares, route selection, history, and layout stability',async({pag
  await expect(page.locator('#detail-fund-flow')).toContainText('14,384.806266');
  await page.getByRole('link',{name:/Back to all investigations/}).click();
  await page.goBack();await expect(page.locator('h1')).toContainText('79AU');
- await page.goForward();await expect(page.getByRole('searchbox')).toBeVisible();
+ await page.goForward();await expect(page.locator('.research-grid')).toBeVisible();
  await page.goBack();await page.getByRole('button',{name:/^Tornado\.cash proxy/}).click();
  await expect(page.locator('#detail-fund-flow')).toContainText('possible test deposit');
  // Opacity/transforms must not change document dimensions while scrolling.

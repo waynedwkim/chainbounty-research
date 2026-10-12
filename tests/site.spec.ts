@@ -1,12 +1,11 @@
 import {test,expect} from '@playwright/test';
-test('desktop search, keyboard charts, copying, navigation and assets',async({page,context})=>{
+test('desktop archive, keyboard charts, copying, navigation and assets',async({page,context})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  await context.grantPermissions(['clipboard-read','clipboard-write']);
  await page.setViewportSize({width:1440,height:1000});await page.goto('/');
  await expect(page).toHaveTitle(/Blockchain investigations/);
- await page.getByRole('searchbox').fill('missing');await expect(page.locator('.empty')).toBeVisible();
- await page.getByRole('button',{name:'Clear filters',exact:true}).click();await expect(page.locator('[data-card]')).toBeVisible();
- await page.getByRole('searchbox').fill('79au');await expect(page.locator('[data-card]')).toBeVisible();
+ await expect(page.locator('[data-card]')).toBeVisible();
+ await expect(page.getByRole('searchbox')).toHaveCount(0);
  await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
  await page.screenshot({path:'test-results/home-desktop.png',fullPage:true,animations:'disabled'});
  await page.getByRole('link',{name:'Read the investigation',exact:true}).first().click();

@@ -70,7 +70,7 @@ npm run build
 npm run test:e2e
 ```
 
-Playwright tests use an isolated headless Edge context, never the user's existing tabs. They cover search/reset, keyboard selection, clipboard, repeated home/article navigation, deep routes, 404, no-JavaScript reading, image loading, reduced motion and horizontal overflow at 360px and 390px. Screenshots appear in `test-results/`. Cover receipts appear in `dist/cover-validation.json`.
+Playwright tests use an isolated headless Edge context, never the user's existing tabs. They cover archive and official channel navigation, keyboard selection, clipboard, repeated home/article navigation, deep routes, 404, no-JavaScript reading, image loading, reduced motion and horizontal overflow at 320, 360, 390, 768, 1024, 1280 and 1440px. Screenshots appear in `test-results/`. Cover receipts appear in `dist/cover-validation.json`.
 
 ## Content provenance and exclusions
 
@@ -85,3 +85,4 @@ Font license: `public/assets/fonts/LICENSE.txt` (SIL Open Font License). ChainBo
 ## Private GitHub handoff
 
 See `scripts/push-private.ps1`. It verifies the authenticated user is exactly `waynedwkim`, refuses to reuse an existing repository, creates only a **private personal** repository, pushes `main`, and verifies remote commit and visibility. It never deploys the site. If `GH_TOKEN` is invalid, reauthenticate the GitHub CLI locally; do not paste tokens into source files or chat.
+
